@@ -1,0 +1,109 @@
+<header>
+  <p><strong>Faça a viagem dos seus sonhos!</strong></p>
+  <p>
+    Use milhas para ter os melhores pacotes de viagens e aproveite suas férias!
+  </p>
+</header>
+<main>
+  <div class="opcoes">
+    <label class="c100">
+      País de origem:
+      <select [(ngModel)]="originCountry" (ngModelChange)="originCity = null">
+        <option *ngFor="let country of countries" [ngValue]="country">
+          {{ country.country }}
+        </option>
+      </select>
+    </label>
+    <label class="c100">
+      Cidade de origem:
+      <select [(ngModel)]="originCity">
+        <ng-container *ngIf="originCountry != null">
+          <option *ngFor="let city of originCountry.cities" [ngValue]="city">
+            {{ city.city }}
+          </option>
+        </ng-container>
+      </select>
+    </label>
+    <label class="c100">
+      Pais de destino:
+      <select
+        [(ngModel)]="destinationCountry"
+        (ngModelChange)="destinationCity = null"
+      >
+        <option *ngFor="let country of countries" [ngValue]="country">
+          {{ country.country }}
+        </option>
+      </select>
+    </label>
+    <label class="c100">
+      Cidade de destino:
+      <select [(ngModel)]="destinationCity">
+        <ng-container *ngIf="destinationCountry != null">
+          <option
+            *ngFor="let city of destinationCountry.cities"
+            [ngValue]="city"
+          >
+            {{ city.city }}
+          </option>
+        </ng-container>
+      </select>
+    </label>
+
+    <label class="c50">
+      Adultos:
+      <input [(ngModel)]="adults" type="number" min="0" />
+    </label>
+    <label class="c50">
+      Crianças:
+      <input [(ngModel)]="children" type="number" min="0" />
+    </label>
+
+    <label class="c50"
+      ><input
+        name="classe"
+        type="radio"
+        [value]="false"
+        [(ngModel)]="firstClass"
+      />
+      Econômica
+    </label>
+    <label class="c50"
+      ><input
+        name="classe"
+        type="radio"
+        [value]="true"
+        [(ngModel)]="firstClass"
+      />
+      Executiva
+    </label>
+
+    <label class="c100"
+      >Utilizar {{ miles }} milhas:
+      <input
+        name="classe"
+        type="range"
+        [(ngModel)]="miles"
+        [max]="maxMiles"
+        step="100"
+      />
+    </label>
+  </div>
+  <div class="simulacao">
+    <p><strong>Resumo da viagem</strong></p>
+    <p *ngIf="errorMessage">{{ errorMessage }}</p>
+    <ng-container *ngIf="!errorMessage">
+      <p>Origem: {{ originCity?.city }} - {{ originCountry?.country }}</p>
+      <p>
+        Destino: {{ destinationCity?.city }} - {{ destinationCountry?.country }}
+      </p>
+      <p>Distância: {{ distance | number: "0.0-0" }} km</p>
+      <p>{{ adults }} adulto(s), {{ children }} criança(s)</p>
+      <p>Tipo de passagem: {{ firstClass ? "Executiva" : "Econômica" }}</p>
+      <p>{{ pricePerAdult | currency }} por adulto</p>
+      <p>{{ pricePerChild | currency }} por criança</p>
+      <p>Milhas: {{ miles }}</p>
+      <p>Valor abatido por milhas: {{ milesPrice | currency }}</p>
+      <p>Total: {{ totalPrice - milesPrice | currency }}</p>
+    </ng-container>
+  </div>
+</main>

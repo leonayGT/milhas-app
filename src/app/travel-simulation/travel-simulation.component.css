@@ -1,0 +1,60 @@
+:host {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  font-size: 16px;
+  margin: 1rem 0;
+}
+
+input,
+select,
+:host {
+  font-size: 16px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+header {
+  text-align: center;
+}
+main {
+  max-width: 800px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.opcoes,
+.simulacao {
+  flex: 1 1 200px;
+  border: 2px solid #bbb;
+  border-radius: 5px;
+  padding: 0.5rem;
+  margin: 0.5rem;
+}
+
+label {
+  display: inline-block;
+  box-sizing: border-box;
+  padding: 0.5rem;
+}
+label.c100 {
+  width: 100%;
+}
+label.c50 {
+  width: 50%;
+}
+
+input[type="number"],
+input[type="range"],
+select {
+  box-sizing: border-box;
+  width: 100%;
+}
+
+input[type="radio"] {
+  margin-left: 0;
+}
+
+p {
+  padding: 0.5rem;
+  margin: 0;
+}
